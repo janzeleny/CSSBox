@@ -377,6 +377,7 @@ public class BoxFactory
             boolean lastwhite = (stat.lastinflow == null) || stat.lastinflow.isBlock() || (stat.lastinflow.endsWithWhitespace() && stat.lastinflow.collapsesSpaces());
             //the new box may be collapsed if it allows collapsing whitespaces and it is a whitespace
             boolean collapse = lastwhite && newbox.isWhitespace() && newbox.collapsesSpaces() && !newbox.isSticky() && !(newbox instanceof InlineBlockBox);
+            System.out.println("Elem: " + newbox + " last " + stat.lastinflow + " collapse " + collapse);
             if (!collapse)
             {
                 stat.parent.addSubBox(newbox);
@@ -390,7 +391,10 @@ public class BoxFactory
         if (newbox instanceof ElementBox && ((ElementBox) newbox).postadd != null)
         {
             for (Box box : ((ElementBox) newbox).postadd)
+            {
+                System.out.println("postadd " + box);
                 addToTree(box, stat);
+            }
         }
         
     }
